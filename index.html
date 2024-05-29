@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <title>ADIVINHE O NÚMERO SECRETO</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="containerPrimeiro">
+            <div class="containerTexto">
+                <div class="containerTitulo">
+                    <h1>Qual o número secreto</h1>
+                    <p class="paragrafo">Escolha um número entre 1 a 10</p>
+                </div>
+                <input type="number" min="1" max="10" class="containerInput">
+                <div class="containerBotoes">
+                    <button onclick="verificarNumero()"
+                    id="chutar" class="botao">Chutar</button>
+                    <button onclick="reiniciarJogo()" id="reiniciar" class="botao" disabled>Novo jogo</button>
+                </div>
+            </div>
+        </div>
+        <img src="roboDuvida.png" alt="Robo" class="containerRobo" />
+    </div>
+
+
+
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
