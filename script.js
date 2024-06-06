@@ -8,51 +8,51 @@ function sortearNumeroAleatorio() {
     return numeroRandom;
 }
 
-document.querySelector('input').addEventListener('keyup',function(event) {
-    if (event.key === "Enter") {
-        
-        if(tentativas > 2 ) {
-            mostrarTextoTela('p', 'Reinicie o Jogo');
-            mostrarTextoTela('input','');        
-        }else {
-            verificarNumero();
-            mostrarTextoTela('input','');
-        }
-    }
-});
+habilitarEnter();
 
 
 mostrarMensagemInicial();
 
 function verificarNumero() {
+
     let chute = document.querySelector('input').value;
     
+    if(isNaN (chute) || chute < 0 || chute > 10) {
 
-    if (chute == numeroSorteado) {
-        mostrarTextoTela('h1', 'Parabéns!');
-        mostrarTextoTela('p', 'Você acertou o número secreto!');
-        document.getElementById('chutar').setAttribute('disabled',true)
-        document.getElementById('reiniciar').removeAttribute('disabled');
-        resetar();
-        
-    } else {
-        if (chute > numeroSorteado) {
-            mostrarTextoTela('p', 'O número secreto é menor');
+        mostrarTextoTela('p', 'Escolha um número entre 1 e 10');
+    }else {
+        if (chute == numeroSorteado) {
+            mostrarTextoTela('h1', 'Parabéns!');
+            mostrarTextoTela('p', 'Você acertou o número secreto!');
+            document.getElementById('chutar').setAttribute('disabled',true)
+            document.getElementById('reiniciar').removeAttribute('disabled');
+            document.getElementById('myinput').disabled=true;
+            resetar();
+            desabilitarEnter();
+            
         } else {
-            mostrarTextoTela('p', 'O número secreto é maior');
-        } 
+            if (chute > numeroSorteado) {
+                mostrarTextoTela('p', 'O número secreto é menor');
+            } else {
+                mostrarTextoTela('p', 'O número secreto é maior');
+            } 
 
-        if (chute > 10){
-            mostrarTextoTela('p', 'O número está fora da faixa de chute');
-        } 
-        tentativas++;
-        resetar();
+            if (chute > 10){
+                mostrarTextoTela('p', 'O número está fora da faixa de chute');
+                tentativas--;
+            } 
+            tentativas++;
+            resetar();
+            }
+
+        if (tentativas == 2) {
+            mostrarTextoTela('h1', 'Fim do Jogo');
+            mostrarTextoTela('p', 'Você perdeu. Comece um novo jogo. ');
+            document.getElementById('chutar').setAttribute('disabled',true);
+            document.getElementById('reiniciar').removeAttribute('disabled');
+            document.getElementById('myinput').disabled=true;
+            desabilitarEnter();
         }
-    if (tentativas == 2) {
-        mostrarTextoTela('h1', 'Fim do Jogo');
-        mostrarTextoTela('p', 'Você perdeu. Comece um novo jogo. ')
-        document.getElementById('chutar').setAttribute('disabled',true)
-        document.getElementById('reiniciar').removeAttribute('disabled');
     }
 }
 
@@ -81,5 +81,29 @@ function reiniciarJogo() {
     mostrarMensagemInicial();
     document.getElementById('reiniciar').setAttribute('disabled', true)
     document.getElementById('chutar').removeAttribute('disabled');
+    document.getElementById('myinput').disabled=false;
     return numeroSorteado;
+}
+
+function habilitarEnter() {
+    document.querySelector('input').addEventListener ('keyup', function(event) {
+
+        if (event.key === "Enter" ) {   
+            verificarNumero();
+            motrarTextoTela('input','');                                             
+        }
+            
+        
+    });
+
+}   
+
+
+function desabilitarEnter() {
+    document.querySelector('input').addEventListener('keyup', function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();            
+            mostrarTextoTela('input', '');
+        }
+    });
 }
