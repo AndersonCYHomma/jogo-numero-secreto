@@ -11,8 +11,13 @@ function sortearNumeroAleatorio() {
 document.querySelector('input').addEventListener('keyup',function(event) {
     if (event.key === "Enter") {
         
-        verificarNumero();
-        mostrarTextoTela('input','');
+        if(tentativas > 2 ) {
+            mostrarTextoTela('p', 'Reinicie o Jogo');
+            mostrarTextoTela('input','');        
+        }else {
+            verificarNumero();
+            mostrarTextoTela('input','');
+        }
     }
 });
 
@@ -36,7 +41,7 @@ function verificarNumero() {
         } else {
             mostrarTextoTela('p', 'O número secreto é maior');
         } 
-        
+
         if (chute > 10){
             mostrarTextoTela('p', 'O número está fora da faixa de chute');
         } 
