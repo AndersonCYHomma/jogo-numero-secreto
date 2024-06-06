@@ -33,6 +33,8 @@ function verificarNumero() {
     } else {
         if (chute > numeroSorteado) {
             mostrarTextoTela('p', 'O número secreto é menor');
+        } else if (chute > 10){
+            mostrarTextoTela('p', 'O número está fora da faixa de chute');
         } else {
             mostrarTextoTela('p', 'O número secreto é maior');
         }
